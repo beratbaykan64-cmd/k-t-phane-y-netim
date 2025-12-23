@@ -1,0 +1,35 @@
+@model KutuphaneYonetim.Models.Kitap
+
+@{
+    ViewData["Title"] = "Yeni Kitap Ekle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4>Yeni Kitap Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Ekle" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Ad" class="form-label">Kitap Adı</label>
+                        <input asp-for="Ad" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Yazar" class="form-label">Yazar Adı</label>
+                        <input asp-for="Yazar" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SayfaSayisi" class="form-label">Sayfa Sayısı</label>
+                        <input asp-for="SayfaSayisi" type="number" class="form-control" />
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KutuphaneYonetim</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KutuphaneYonetim.styles.css" asp-append-version="true" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#yanMenu" aria-controls="yanMenu">
+                    <i class="fa-solid fa-bars"></i> </button>
+
+                <span class="navbar-brand ms-3">Kütüphane Sistemi</span>
+            </div>
+        </nav>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="yanMenu" aria-labelledby="yanMenuLabel">
+            
+            <div class="offcanvas-header bg-primary text-white">
+                <h5 class="offcanvas-title" id="yanMenuLabel">📚 Menü</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            
+            <div class="offcanvas-body">
+                @{
+                    string url = Context.Request.Path;
+                }
+
+                <ul class="nav flex-column">
+                    
+                    <li class="nav-item mb-2">
+                        <a class="nav-link p-3 rounded @(url == "/" || url.Contains("Home") && !url.Contains("Hakkimizda") ? "active bg-light text-primary fw-bold" : "text-dark")" 
+                           asp-controller="Home" asp-action="Index">
+                           🏠 Ana Sayfa
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item mb-2">
+                        <a class="nav-link p-3 rounded @(url.Contains("Kitaplar") && !url.Contains("Yonetim") ? "active bg-light text-primary fw-bold" : "text-dark")" 
+                           asp-controller="Kitaplar" asp-action="Index">
+                           📚 Kitap Arşivi
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link p-3 rounded @(url.Contains("Hakkimizda") ? "active bg-light text-primary fw-bold" : "text-dark")" 
+                           asp-controller="Home" asp-action="Hakkimizda">
+                           ℹ️ Hakkımızda
+                        </a>
+                    </li>
+
+                    <hr />
+
+                    <li class="nav-item">
+                        <a class="nav-link p-3 rounded @(url.Contains("Yonetim") ? "active bg-danger text-white fw-bold" : "text-danger")" 
+                           asp-controller="Kitaplar" asp-action="Yonetim">
+                           ⚙️ Yönetim Paneli
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5 text-center">
+        <div class="container">
+            &copy; 2025 - KutuphaneYonetim
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

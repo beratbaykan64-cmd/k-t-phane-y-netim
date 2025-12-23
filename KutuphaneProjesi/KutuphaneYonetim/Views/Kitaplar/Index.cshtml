@@ -1,0 +1,43 @@
+@model IEnumerable<KutuphaneYonetim.Models.Kitap>
+
+@{
+    ViewData["Title"] = "Kitap Listesi";
+}
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <h2>📚 Kitap Arşivi</h2>
+        </div>
+        <div class="col-md-6">
+            <form asp-controller="Kitaplar" asp-action="Index" method="get" class="d-flex">
+                <input type="text" name="arananKelime" class="form-control me-2" placeholder="Kitap veya Yazar Ara..." />
+                <button type="submit" class="btn btn-outline-primary">🔍 Ara</button>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Yazar</th>
+                <th>Sayfa Sayısı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Ad)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Yazar)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SayfaSayisi)</td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">Kayıt bulunamadı.</div>
+    }
+</div>
