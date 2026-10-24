@@ -1,7 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+
+COPY ["KutuphaneProjesi/KutuphaneYonetim/KutuphaneYonetim.csproj", "KutuphaneProjesi/KutuphaneYonetim/"]
+RUN dotnet restore "KutuphaneProjesi/KutuphaneYonetim/KutuphaneYonetim.csproj"
+
 COPY . .
-RUN dotnet restore
+WORKDIR "/src/KutuphaneProjesi/KutuphaneYonetim"
 RUN dotnet publish -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
